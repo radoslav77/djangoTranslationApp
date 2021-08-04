@@ -14,7 +14,7 @@ try {
     //errorMessage.style.display = 'block'
   }
 
-let choice = []
+let choice = ''
 
 //console.log(textInput)
 //console.log(form)
@@ -35,19 +35,21 @@ recognition.onresult = function(event) {
     var transcript = event.results[current][0].transcript
 	if ( transcript.includes('translate to')) {
 		let Lang =  transcript.split(/(\s+)/)
-		choice.push(Lang[4])
-		const LangChoice = document.getElementById('default')
-		LangChoice.value = choice
-		console.log(LangChoice.value) 
+		choice = Lang[4]
+    const jsChoice = document.getElementById('js')
+
+		jsChoice.hidden=false
+    jsChoice.value = choice
+    jsChoice.innerText = choice    
+
 		
 		
-		noteContent = Lang.slice(5, 20)
+		noteContent = Lang.pop(0, 5)
 		console.log(noteContent)
     	textInput.style.color = '#000'
-    	textInput.innerHTML = noteContent
+    	textInput.innerHTML = `${noteContent}`
 	}
-	
-	//choice.push(transcript)
+
 	
     // Add the current transcript to the contents of our Note.
 
@@ -55,9 +57,9 @@ recognition.onresult = function(event) {
     var mobileRepeatBug = (current == 1 && transcript == event.results[0][0].transcript);
 	
     if(!mobileRepeatBug) {
-        noteContent = transcript
+        noteContent = choice
         textInput.style.color = '#000'
-        textInput.innerHTML = noteContent
+        textInput.innerHTML = `${noteContent}`
 	} 
  	
   }
@@ -68,7 +70,9 @@ const startBtn = document.querySelector('#start-btn')
 const stopBtn = document.querySelector('#stop-btn')
 
 startBtn.addEventListener('click', function(e) {
+   
     recognition.start()
+    
   });
 
   stopBtn.addEventListener('click', function(e) {
