@@ -36,15 +36,13 @@ recognition.onresult = function(event) {
 	if ( transcript.includes('translate to')) {
 		let Lang =  transcript.split(/(\s+)/)
 		choice = Lang[4]
-    const jsChoice = document.getElementById('js')
 
-		jsChoice.hidden=false
-    jsChoice.value = choice
-    jsChoice.innerText = choice    
+    langEL.value = choice
+    langEL.innerText = choice    
 
 		
 		
-		noteContent = Lang.pop(0, 5)
+		noteContent = Lang.pop(0, 3)
 		console.log(noteContent)
     	textInput.style.color = '#000'
     	textInput.innerHTML = `${noteContent}`
