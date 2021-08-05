@@ -34,18 +34,19 @@ recognition.onresult = function(event) {
     // Get a transcript of what was said.
     var transcript = event.results[current][0].transcript
 	if ( transcript.includes('translate to')) {
-		let Lang =  transcript.split(/(\s+)/)
+		const Lang =  transcript.split(/(\s+)/)
 		choice = Lang[4]
 
-    langEL.value = choice
-    langEL.innerText = choice    
+    const choiceVlue = document.getElementById('default')
+    choiceVlue.value = choice
+    choiceVlue.innerText = choice    
+		console.log(choice)
 
-		
-		
-		noteContent = Lang.pop(0, 3)
+		noteContent = Lang.splice(5, 100).join(" ")
 		console.log(noteContent)
-    	textInput.style.color = '#000'
-    	textInput.innerHTML = `${noteContent}`
+   
+    textInput.style.color = '#000'
+    textInput.innerHTML = noteContent
 	}
 
 	
@@ -55,14 +56,14 @@ recognition.onresult = function(event) {
     var mobileRepeatBug = (current == 1 && transcript == event.results[0][0].transcript);
 	
     if(!mobileRepeatBug) {
-        noteContent = choice
+        noteContent = Lang.splice(5, 100).join(" ")
         textInput.style.color = '#000'
-        textInput.innerHTML = `${noteContent}`
+        textInput.innerHTML = noteContent
 	} 
  	
   }
 
-console.log(choice)
+
 
 const startBtn = document.querySelector('#start-btn')
 const stopBtn = document.querySelector('#stop-btn')
