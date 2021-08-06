@@ -113,6 +113,7 @@ textarea:focus {
   font-size: 20px;
   width: 40%;
   border-radius: 10px;
+  margin-top: 5px;
 }
 
 .clear:hover {

@@ -4,6 +4,7 @@ const langEL = document.getElementById('leng')
 const btnEl = document.getElementById('btn')
 const resultDiv = document.querySelector('.result-container')
 const clearBtn = document.querySelector('.clear')
+const readFor = document.getElementById('read')
 
 try {
     var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -77,6 +78,13 @@ startBtn.addEventListener('click', function(e) {
   stopBtn.addEventListener('click', function(e) {
     recognition.stop()
   });
+
+
+readFor.addEventListener('click', () => {
+  resultDiv.readOutLoud()
+  console.log(resultDiv)
+})
+
 //Here is the entire code needed to read out a string.
   function readOutLoud(message) {
     var speech = new SpeechSynthesisUtterance()
