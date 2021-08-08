@@ -6,6 +6,8 @@ const resultDiv = document.querySelector('.result-container')
 const clearBtn = document.querySelector('.clear')
 const readFor = document.getElementById('read')
 
+
+
 try {
     var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     var recognition = new SpeechRecognition();
@@ -14,14 +16,18 @@ try {
     console.error(e);
     //errorMessage.style.display = 'block'
   }
-
+// languadge variable
 let choice = ''
 
-//console.log(textInput)
-//console.log(form)
-//console.log(langEL)
-//console.log(btnEl)
-//console.log(resultDiv)
+const languadgeCodes = {
+  Spanish : 'es',
+  Japanese : 'ja',
+  Russian : 'ru',
+  Bulgarian : 'bg',
+  German : 'de',
+  Arabic : 'ar-ag',
+  Greek: 'el',
+}
 
 var noteContent = ''
 
@@ -34,6 +40,7 @@ recognition.onresult = function(event) {
   
     // Get a transcript of what was said.
     var transcript = event.results[current][0].transcript
+    // validates the trasnccript and leasten for the languadge keyword
 	if ( transcript.includes('translate to')) {
 		const Lang =  transcript.split(/(\s+)/)
 		choice = Lang[4]
@@ -65,7 +72,7 @@ recognition.onresult = function(event) {
   }
 
 
-
+// start and stop buttons for the voice recognition
 const startBtn = document.querySelector('#start-btn')
 const stopBtn = document.querySelector('#stop-btn')
 
@@ -79,27 +86,36 @@ startBtn.addEventListener('click', function(e) {
     recognition.stop()
   });
 
-
+// read the message button
 readFor.addEventListener('click', () => {
-  resultDiv.readOutLoud()
-  console.log(resultDiv)
+  readOutLoud()
 })
 
 //Here is the entire code needed to read out a string.
-  function readOutLoud(message) {
+  function readOutLoud() {
+    let message = resultDiv.innerHTML 
     var speech = new SpeechSynthesisUtterance()
-  
+    var choiceLang = document.getElementById('js').getAttribute('value')
+    console.log(choiceLang)
+    
     // Set the text and voice attributes.
-    speech.text = message
-    speech.volume = 1
-    speech.rate = 1
-    speech.pitch = 1
-  
-    window.speechSynthesis.speak(speech)
+    // Read the message on the translated langudge
+    for(var key in languadgeCodes) {
+      if (choiceLang == key || choice == key) {
+        var value = languadgeCodes[key]
+        
+        speech.lang = value
+        speech.text = message
+        speech.volume = 1
+        speech.rate = 1
+        speech.pitch = 1
+      
+        window.speechSynthesis.speak(speech)
+          }
+    }
   }
-  
+  // clears the content itn the reslt div
 clearBtn.addEventListener('click', () => {
 	resultDiv.innerHTML = 'Here will be your translation!!!'
 })
  
-// choice.pop([0])

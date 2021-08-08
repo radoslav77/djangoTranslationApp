@@ -16,7 +16,8 @@ def index(request):
         translator = Translator(to_lang=language)
         translation = translator.translate(text)
         return render(request, 'translate/index.html', {
-            'text': translation
+            'text': translation,
+            'lang': language,
         })
         '''
         # returns json responce
