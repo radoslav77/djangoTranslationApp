@@ -5,7 +5,8 @@
 }
 
 body {
-  background-color: #f9d7fc;
+  background: linear-gradient(140deg, #ed2b9f 30%, #5794eb 60%);
+
   font-family: 'Roboto', sans-serif;
   display: flex;
   flex-direction: column;

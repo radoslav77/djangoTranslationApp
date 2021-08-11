@@ -67,7 +67,7 @@ recognition.onresult = function(event) {
     var mobileRepeatBug = (current == 1 && transcript == event.results[0][0].transcript);
 	
     if(!mobileRepeatBug) {
-        noteContent = transcript//Lang.splice(5, 100).join(" ")
+        noteContent = Lang.splice(5, 100).join(" ")
         textInput.style.color = '#000'
         textInput.innerHTML = noteContent
 	} 
