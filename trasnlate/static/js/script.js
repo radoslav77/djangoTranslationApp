@@ -8,6 +8,8 @@ const readFor = document.getElementById('read')
 
 
 
+
+
 try {
     var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     var recognition = new SpeechRecognition();
@@ -55,7 +57,8 @@ recognition.onresult = function(event) {
    
     textInput.style.color = '#000'
     textInput.innerHTML = noteContent
-	}
+    
+  }
 
 	
     // Add the current transcript to the contents of our Note.
@@ -64,7 +67,7 @@ recognition.onresult = function(event) {
     var mobileRepeatBug = (current == 1 && transcript == event.results[0][0].transcript);
 	
     if(!mobileRepeatBug) {
-        noteContent = Lang.splice(5, 100).join(" ")
+        noteContent = transcript//Lang.splice(5, 100).join(" ")
         textInput.style.color = '#000'
         textInput.innerHTML = noteContent
 	} 
@@ -72,6 +75,7 @@ recognition.onresult = function(event) {
   }
 
 
+  
 // start and stop buttons for the voice recognition
 const startBtn = document.querySelector('#start-btn')
 const stopBtn = document.querySelector('#stop-btn')
@@ -80,11 +84,11 @@ startBtn.addEventListener('click', function(e) {
    
     recognition.start()
     
-  });
+  })
 
   stopBtn.addEventListener('click', function(e) {
     recognition.stop()
-  });
+  })
 
 // read the message button
 readFor.addEventListener('click', () => {
